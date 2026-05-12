@@ -16,13 +16,12 @@ Do not duplicate benchmark rules into adapter files. If the benchmark workflow c
 
 Require the user to provide `scope` before starting real work:
 
-- `scope=task`: complete one benchmark task for one project directory under `bench/`. If `project` is missing, ask the user for a project or explicit permission to use `project=auto`.
-- `scope=project`: complete multiple tasks for one project directory under `bench/`. Require `project` and `count`; ask if either is missing.
-- `scope=bench`: complete tasks across multiple projects. Require `count` and a project selection strategy; ask if either is missing.
+- `scope=project`: complete the project-level benchmark target for one project directory under `bench/`. Require `project`; ask if it is missing.
+- `scope=bench`: complete the benchmark across multiple project directories under `bench/`. Require a project selection strategy; ask if it is missing.
 
 If the user asks to run the benchmark but omits `scope`, ask for `scope` first. Do not silently default to a scope.
 
-Resolve `project` to an existing directory under `bench/` before reading project files. If the user provides an alias or display name, map it to the matching `bench/<project>/` directory and report the resolved directory.
+For `scope=project`, resolve `project` to an existing directory under `bench/` before reading project files. If the user provides an alias or display name, map it to the matching `bench/<project>/` directory and report the resolved directory.
 
 ## Source Of Truth
 
@@ -38,7 +37,7 @@ Load `bench/README.md` first, then only the README files for the selected projec
 ## Benchmark Workflow
 
 1. Resolve the benchmark root as the repository directory containing `OCA_BENCH.md` and `bench/README.md`. If it is missing or ambiguous, stop and ask for its path.
-2. Read the main protocol and the selected project protocol. Follow the benchmark's definitions for evidence, task fields, status values, validation, and PR materials.
+2. Read the main protocol and the selected project protocol for each selected project. Follow the benchmark's definitions for evidence, task fields, status values, validation, and PR materials.
 3. Select a real, evidence-backed upstream problem. Acceptable evidence includes issues, discussions, maintainer comments, failing tests, documented API behavior, reproducible logs, or strong comparison evidence. Never fabricate evidence.
 4. Determine and record a fixed `base_commit` from the target repository before implementing.
 5. Work in a temporary clone or worktree outside the benchmark root. A sibling directory such as `<benchmark-root-parent>/.oca-bench-work/` is acceptable; the target repository must not be copied into `bench/` or into any benchmark project directory.
@@ -89,7 +88,7 @@ Assign the next `Txxx` id by inspecting existing `bench/<project>/tasks.jsonl`, 
 
 When a run finishes, report:
 
-- selected scope, project, task id, and target repository
+- selected scope, project directory/directories, task id(s), and target repository/repositories
 - evidence summary and base commit
 - patch path and benchmark metadata files updated
 - validation commands and results
