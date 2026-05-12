@@ -1,0 +1,9 @@
+---
+description: Use when the user mentions oca-bench, oss-coding-agent-bench, or asks to run OSS coding-agent benchmark tasks.
+globs: []
+alwaysApply: false
+---
+
+Read `OCA_BENCH.md` and follow it as the canonical source for OCA Bench.
+
+This Cursor rule is only an adapter. Do not duplicate benchmark rules here.
