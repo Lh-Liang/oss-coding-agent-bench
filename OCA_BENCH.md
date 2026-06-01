@@ -17,7 +17,7 @@ Do not duplicate benchmark rules into adapter files. If the benchmark workflow c
 Require the user to provide `scope` before starting real work:
 
 - `scope=project`: complete the project-level benchmark target for one project directory under `bench/`. Require `project`; ask if it is missing.
-- `scope=bench`: complete the benchmark across multiple project directories under `bench/`. Require a project selection strategy; ask if it is missing.
+- `scope=bench`: complete the full benchmark across all project directories under `bench/`.
 
 If the user asks to run the benchmark but omits `scope`, ask for `scope` first. Do not silently default to a scope.
 
